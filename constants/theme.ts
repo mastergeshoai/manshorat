@@ -161,7 +161,7 @@ export const lightTheme = {
   },
 };
 
-export type AppTheme = typeof darkTheme;
+export type AppTheme = typeof darkTheme | typeof lightTheme;
 
 // Default export for backward compatibility during migration
 export const theme = darkTheme;

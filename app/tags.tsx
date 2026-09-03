@@ -272,7 +272,7 @@ export default function TagsScreen() {
           {visibleTags.length === 0 ? (
             <View style={s.noTagsState}>
               <MaterialIcons name="search-off" size={36} color={theme.textMuted} />
-              <Text style={s.noTagsText}>لا توجد وسوم تطابق "{tagSearch}"</Text>
+              <Text style={s.noTagsText}>لا توجد وسوم تطابق &quot;{tagSearch}&quot;</Text>
             </View>
           ) : (
             <Animated.View entering={FadeIn.duration(400)} style={s.tagCloud}>

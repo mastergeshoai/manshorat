@@ -49,6 +49,8 @@ const ReasonBadge = memo(({ reason, icon, color }: {
     <Text style={[rb.text, { color }]} numberOfLines={1}>{reason}</Text>
   </View>
 ));
+ReasonBadge.displayName = 'ReasonBadge';
+
 const rb = StyleSheet.create({
   wrap: {
     flexDirection: 'row', alignItems: 'center', gap: 4,
@@ -183,6 +185,8 @@ const FeedToolCard = memo(({
     </Animated.View>
   );
 });
+
+FeedToolCard.displayName = 'FeedToolCard';
 
 const tc = StyleSheet.create({
   card: {
@@ -338,6 +342,8 @@ const FeedPostCard = memo(({ item, theme, index }: {
   );
 });
 
+FeedPostCard.displayName = 'FeedPostCard';
+
 const pc = StyleSheet.create({
   card: {
     marginHorizontal: 16, marginBottom: 14, borderRadius: R,
@@ -418,6 +424,8 @@ const CompactToolCard = memo(({ tool, theme }: { tool: any; theme: any }) => {
   );
 });
 
+FeedPostCard.displayName = 'FeedPostCard';
+
 const ct = StyleSheet.create({
   card: {
     width: 112, alignItems: 'center', gap: 8,
@@ -469,6 +477,8 @@ const CompactPostRow = memo(({ post, theme }: { post: any; theme: any }) => {
   );
 });
 
+CompactToolCard.displayName = 'CompactToolCard';
+
 const cpr = StyleSheet.create({
   row: {
     flexDirection: 'row', alignItems: 'center', gap: 12,
@@ -510,6 +520,9 @@ const SectionHeader = memo(({
     ) : null}
   </View>
 ));
+CompactPostRow.displayName = 'CompactPostRow';
+SectionHeader.displayName = 'SectionHeader';
+
 const hd = StyleSheet.create({
   row: {
     flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',
@@ -756,9 +769,9 @@ export default function DiscoverScreen() {
               <MaterialIcons name="search" size={15} color={theme.primary} />
               <Text style={[s.searchHeaderTxt, { color: theme.textPrimary }]}>
                 {totalSearchResults > 0 ? (
-                  <>{totalSearchResults} نتيجة لـ <Text style={{ color: theme.primary }}>"{searchQuery}"</Text></>
+                  <>{totalSearchResults} نتيجة لـ <Text style={{ color: theme.primary }}>{'"'}{searchQuery}{'"'}</Text></>
                 ) : (
-                  <>لا توجد نتائج لـ <Text style={{ color: theme.primary }}>"{searchQuery}"</Text></>
+                  <>لا توجد نتائج لـ <Text style={{ color: theme.primary }}>{'"'}{searchQuery}{'"'}</Text></>
                 )}
               </Text>
             </View>

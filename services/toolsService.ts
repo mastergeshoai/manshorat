@@ -90,10 +90,10 @@ export async function toggleSave(userId: string, toolId: string, isSaved: boolea
 export async function toggleVote(userId: string, toolId: string, isVoted: boolean) {
   if (isVoted) {
     await supabase.from('user_votes').delete().eq('user_id', userId).eq('tool_id', toolId);
-    await supabase.rpc('increment_votes', { tool_id: toolId, amount: -1 }).catch(() => {});
+    await Promise.resolve(supabase.rpc('increment_votes', { tool_id: toolId, amount: -1 })).catch(() => {});
   } else {
     await supabase.from('user_votes').insert({ user_id: userId, tool_id: toolId });
-    await supabase.rpc('increment_votes', { tool_id: toolId, amount: 1 }).catch(() => {});
+    await Promise.resolve(supabase.rpc('increment_votes', { tool_id: toolId, amount: 1 })).catch(() => {});
   }
 }
 
@@ -103,7 +103,7 @@ export async function upsertRating(userId: string, toolId: string, rating: numbe
     { onConflict: 'user_id,tool_id' }
   );
   // Recalculate tool rating from all user ratings
-  await supabase.rpc('update_tool_rating', { p_tool_id: toolId }).catch(() => {});
+  await Promise.resolve(supabase.rpc('update_tool_rating', { p_tool_id: toolId })).catch(() => {});
 }
 
 export async function addCommentToDb(userId: string, toolId: string, text: string) {

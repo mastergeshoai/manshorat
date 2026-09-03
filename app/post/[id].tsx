@@ -268,7 +268,7 @@ function RenderSection({ section, index, theme, catColor }: {
       return (
         <AnimatedRN.View entering={FadeInDown.duration(280).delay(delay)}>
           <View style={[rs.quote, { borderRightColor: catColor + '80', backgroundColor: theme.surface }]}>
-            <Text style={[rs.quoteIcon, { color: catColor }]}>"</Text>
+            <Text style={[rs.quoteIcon, { color: catColor }]}>{'"'}</Text>
             <Text style={[rs.quoteText, { color: theme.textSecondary }]}>{section.text}</Text>
           </View>
         </AnimatedRN.View>
@@ -353,7 +353,7 @@ const rbs = StyleSheet.create({
   label: { fontSize: 10, fontFamily: TJM },
 });
 
-// ─── Main Screen ───────────────────────────────────────────────────────────────
+// ─── Main Screen ──────────────────────────────────────────────────────────��────
 export default function PostDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const { theme } = useTheme();

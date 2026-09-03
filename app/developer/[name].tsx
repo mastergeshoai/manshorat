@@ -397,7 +397,7 @@ export default function DeveloperProfileScreen() {
                 <MaterialIcons name="search-off" size={44} color={theme.textMuted} />
               </View>
               <Text style={s.emptyTitle}>لا نتائج</Text>
-              <Text style={s.emptySub}>لم يُعثر على أداة بكلمة "{toolSearch}"</Text>
+              <Text style={s.emptySub}>لم يُعثر على أداة بكلمة &quot;{toolSearch}&quot;</Text>
             </View>
           ) : (
             <View style={s.toolsList}>

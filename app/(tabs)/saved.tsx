@@ -331,7 +331,7 @@ export default function SavedScreen() {
               </View>
               <Text style={s.emptyTitle}>القائمة فارغة</Text>
               <Text style={s.emptySubtitle}>
-                احفظ أدوات وأضفها لهذه القائمة عبر زر "إضافة لقائمة"
+                احفظ أدوات وأضفها لهذه القائمة عبر زر &quot;إضافة لقائمة&quot;
               </Text>
               <Pressable
                 style={[s.emptyActionBtn, { backgroundColor: theme.primary }]}
