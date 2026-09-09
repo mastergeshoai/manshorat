@@ -85,7 +85,7 @@ export async function getAIProfile(): Promise<AIInterestProfile | null> {
   try {
     const r = await AsyncStorage.getItem(KEYS.PROFILE);
     _profileCache = r ? JSON.parse(r) : null;
-    return _profileCache;
+    return _profileCache ?? null;
   } catch { return null; }
 }
 

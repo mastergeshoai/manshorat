@@ -17,7 +17,7 @@ export default function RootScreen() {
     isOnboardingComplete().then(completed => {
       setDone(completed);
       setChecking(false);
-      if (!completed) router.replace('/onboarding');
+      if (!completed) router.replace('/onboarding' as any);
     });
   }, []);
 

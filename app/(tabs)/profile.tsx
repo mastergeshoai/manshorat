@@ -29,7 +29,7 @@ import { useAuth, useAlert } from '@/template';
 import { useAchievements } from '../../contexts/AchievementsContext';
 import { fetchUserSubmittedTools } from '../../services/toolsService';
 import { Tool } from '../../services/mockData';
-import { TIER_COLORS, TIER_LABELS, NotificationSettings } from '../../services/achievementsService';
+import { TIER_COLORS, TIER_LABELS, NotificationSettings, AchievementTier } from '../../services/achievementsService';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const DISMISSED_MILESTONES_KEY = '@nextools_dismissed_milestones';
@@ -86,7 +86,7 @@ function ConfettiBurst({ active }: { active: boolean }) {
   if (!active) return null;
   return (
     <View style={{position:'absolute',top:8,left:0,right:0,height:130,overflow:'visible',pointerEvents:'none'}}>
-      {particles.map(p=><ConfettiParticle key={p.key} {...p} />)}
+      {particles.map(({ key, ...particle })=><ConfettiParticle key={key} {...particle} />)}
     </View>
   );
 }
@@ -309,7 +309,7 @@ const mpc = StyleSheet.create({
 });
 
 // ─── Achievement Mini Card ─────────────────────────────────────────────────────
-function AchievementMini({ ach, theme }: { ach:any; theme:any }) {
+function AchievementMini({ ach, theme }: { ach: { tier: AchievementTier; icon: string; title: string }; theme: any }) {
   const tierColor = TIER_COLORS[ach.tier] || theme.primary;
   return (
     <View style={[am.card, { backgroundColor: theme.surface, borderColor: tierColor + '40', borderWidth: 1.5 }]}>
@@ -371,7 +371,7 @@ function FootprintSection({ data, theme, s, router, userName, levelInfo, unlocke
           <View style={s.fpEmptyIconBg}><MaterialIcons name="fingerprint" size={44} color={theme.textMuted} /></View>
           <Text style={s.fpEmptyTitle}>لا توجد بصمة بعد</Text>
           <Text style={s.fpEmptySub}>تفاعل مع الأدوات (حفظ، تصويت، تقييم) لنرسم لك تحليلاً دقيقاً</Text>
-          <Pressable onPress={()=>router.push('/(tabs)/explore')} style={[s.emptyBtn,{backgroundColor:theme.primary,marginTop:8}]}>
+          <Pressable onPress={()=>router.push('/(tabs)/explore' as any)} style={[s.emptyBtn,{backgroundColor:theme.primary,marginTop:8}]}>
             <MaterialIcons name="explore" size={16} color="#FFF" />
             <Text style={s.emptyBtnText}>استكشف الأدوات</Text>
           </Pressable>
@@ -486,7 +486,7 @@ function FootprintSection({ data, theme, s, router, userName, levelInfo, unlocke
             const fontSize=tag.pct>=20?14:tag.pct>=10?13:11;
             return (
               <Animated.View key={tag.name} entering={FadeInDown.duration(280).delay(Math.min(i*35,500))}>
-                <Pressable onPress={()=>router.push('/tags')} style={[s.fpTagChip,{borderColor:color+'60',backgroundColor:color+'12'}]}>
+                <Pressable onPress={()=>router.push('/tags' as any)} style={[s.fpTagChip,{borderColor:color+'60',backgroundColor:color+'12'}]}>
                   <Text style={[s.fpTagName,{color,fontSize,fontFamily:tag.pct>=15?'Cairo_700Bold':'Cairo_500Medium'}]}>#{tag.name}</Text>
                   <View style={[s.fpTagBadge,{backgroundColor:color+'25'}]}><Text style={[s.fpTagBadgeText,{color}]}>{tag.count}</Text></View>
                 </Pressable>
@@ -861,21 +861,21 @@ export default function ProfileScreen() {
 
   const [showQR, setShowQR] = useState(false);
 
-  // ─── Settings groups (organized) ──────────────────────────────────────────
+  // ─── Settings groups (organized) ────────────────────────��─────────────────
   const accountSettings = [
-    {icon:'person',label:'تعديل الملف الشخصي',desc:'الاسم والبريد الإلكتروني',action:()=>router.push('/edit-profile')},
-    {icon:'shield',label:'الخصوصية والأمان',desc:'كلمة المرور، تسجيل الخروج',action:()=>router.push('/change-password')},
-    {icon:'admin-panel-settings',label:'لوحة التحكم',desc:'إدارة المنصة',action:()=>router.push('/admin')},
+    {icon:'person',label:'تعديل الملف الشخصي',desc:'الاسم والبريد الإلكتروني',action:()=>router.push('/edit-profile' as any)},
+    {icon:'shield',label:'الخصوصية والأمان',desc:'كلمة المرور، تسجيل الخروج',action:()=>router.push('/change-password' as any)},
+    {icon:'admin-panel-settings',label:'لوحة التحكم',desc:'إدارة المنصة',action:()=>router.push('/admin' as any)},
   ];
   const developerSettings = [
-    {icon:'add-circle',label:'إضافة أداة',desc:'شارك أداتك مع المجتمع',action:()=>router.push('/submit-tool')},
+    {icon:'add-circle',label:'إضافة أداة',desc:'شارك أداتك مع المجتمع',action:()=>router.push('/submit-tool' as any)},
     {icon:'code',label:'الوصول لـ API',desc:'المفاتيح والتوثيق',action:()=>Haptics.selectionAsync()},
   ];
   const appSettings = [
     {icon:'history',label:'سجل التصفح',desc:'الأدوات التي زرتها مؤخراً',action:()=>router.push('/history' as any)},
-    {icon:'info',label:'عن التطبيق',desc:'الإصدار، القانوني، المطور',action:()=>router.push('/about')},
-    {icon:'person-pin',label:'صفحة مستر جيشو',desc:'تعرف على المبرمج',action:()=>router.push('/developer-info')},
-    {icon:'emoji-events',label:'الإنجازات',desc:`${unlockedAchievements.length} إنجاز مكتمل · ${totalPoints} نقطة`,action:()=>router.push('/achievements')},
+    {icon:'info',label:'عن التطبيق',desc:'الإصدار، القانوني، المطور',action:()=>router.push('/about' as any)},
+    {icon:'person-pin',label:'صفحة مستر جيشو',desc:'تعرف على المبرمج',action:()=>router.push('/developer-info' as any)},
+    {icon:'emoji-events',label:'الإنجازات',desc:`${unlockedAchievements.length} إنجاز مكتمل · ${totalPoints} نقطة`,action:()=>router.push('/achievements' as any)},
   ];
 
   return (
@@ -972,7 +972,7 @@ export default function ProfileScreen() {
             )}
 
             {/* View all button */}
-            <Pressable onPress={()=>{Haptics.selectionAsync();router.push('/achievements');}} style={[s.viewAllBtn,{borderColor:theme.primary+'40',backgroundColor:theme.primary+'10'}]}>
+            <Pressable onPress={()=>{Haptics.selectionAsync();router.push('/achievements' as any);}} style={[s.viewAllBtn,{borderColor:theme.primary+'40',backgroundColor:theme.primary+'10'}]}>
               <MaterialIcons name="emoji-events" size={18} color={theme.primary} />
               <Text style={[s.viewAllBtnText,{color:theme.primary}]}>عرض جميع الإنجازات ({([] as any[]).concat(unlockedAchievements).length})</Text>
               <MaterialIcons name="arrow-back" size={16} color={theme.primary} />
@@ -1020,7 +1020,7 @@ export default function ProfileScreen() {
                 <View style={s.emptyIconBg}><MaterialIcons name="add-circle-outline" size={44} color={theme.textMuted} /></View>
                 <Text style={s.emptyTitle}>لم تُرسِل أي أداة بعد</Text>
                 <Text style={s.emptySubtitle}>شارك أداتك مع المجتمع</Text>
-                <Pressable style={[s.emptyBtn,{backgroundColor:theme.primary}]} onPress={()=>router.push('/submit-tool')}>
+                <Pressable style={[s.emptyBtn,{backgroundColor:theme.primary}]} onPress={()=>router.push('/submit-tool' as any)}>
                   <MaterialIcons name="add" size={16} color="#FFF" /><Text style={s.emptyBtnText}>إضافة أداة</Text>
                 </Pressable>
               </View>
@@ -1086,7 +1086,7 @@ export default function ProfileScreen() {
 
             {/* Quick Action */}
             <View style={s.quickActions}>
-              <Pressable style={s.submitButton} onPress={()=>router.push('/submit-tool')}>
+              <Pressable style={s.submitButton} onPress={()=>router.push('/submit-tool' as any)}>
                 <LinearGradient colors={[theme.accent,theme.accentDark]} start={{x:0,y:0}} end={{x:1,y:0}} style={s.submitGradient}>
                   <MaterialIcons name="add-circle" size={20} color="#FFF" />
                   <Text style={s.submitText}>أضف أداتك</Text>

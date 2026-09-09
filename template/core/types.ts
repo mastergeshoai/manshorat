@@ -32,7 +32,7 @@ export interface ModuleConfig {
 
 // Main configuration interface
 export interface OnSpaceConfig extends ModuleConfig {
-  supabase: SupabaseConfig;
+  supabase?: SupabaseConfig;
 }
 
 // Runtime state

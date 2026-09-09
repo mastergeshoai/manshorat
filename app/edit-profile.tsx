@@ -165,7 +165,7 @@ export default function EditProfileScreen() {
           </View>
 
           {/* Change Password */}
-          <Pressable style={s.changePassBtn} onPress={() => router.push('/change-password')}>
+          <Pressable style={s.changePassBtn} onPress={() => router.push('/change-password' as any)}>
             <View style={[s.changePassIcon, { backgroundColor: '#F59E0B20' }]}>
               <MaterialIcons name="lock-reset" size={22} color="#F59E0B" />
             </View>

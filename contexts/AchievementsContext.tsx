@@ -29,6 +29,8 @@ import {
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
+    shouldShowBanner: true,
+    shouldShowList: true,
     shouldPlaySound: true,
     shouldSetBadge: false,
   }),
@@ -277,7 +279,6 @@ export function AchievementsProvider({ children }: { children: React.ReactNode }
         trigger: {
           hour,
           minute,
-          repeats: true,
           type: Notifications.SchedulableTriggerInputTypes.DAILY,
         },
       });
@@ -315,7 +316,6 @@ export function AchievementsProvider({ children }: { children: React.ReactNode }
         trigger: {
           hour,
           minute,
-          repeats: true,
           type: Notifications.SchedulableTriggerInputTypes.DAILY,
         },
       });

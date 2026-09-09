@@ -135,7 +135,7 @@ function TierConfettiBurst({ tier, active }: { tier: AchievementTier; active: bo
       }}
     >
       {particles.map(p => (
-        <ConfettiParticle key={p.key} {...p} />
+        <ConfettiParticle key={p.key} color={p.color} delay={p.delay} angle={p.angle} dist={p.dist} startX={p.startX} size={p.size} />
       ))}
     </View>
   );

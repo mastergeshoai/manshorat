@@ -39,7 +39,7 @@ function ToolCardInner({ tool, variant = 'vertical', width, index = 0 }: ToolCar
   const voteAnimatedStyle = useAnimatedStyle(() => ({ transform: [{ scale: voteScale.value }] }));
   const saveAnimatedStyle = useAnimatedStyle(() => ({ transform: [{ scale: saveScale.value }] }));
 
-  const doNavigate = useCallback(() => { router.push(`/tool/${tool.id}`); }, [router, tool.id]);
+  const doNavigate = useCallback(() => { router.push(`/tool/${tool.id}` as any); }, [router, tool.id]);
   const handlePressIn = useCallback(() => { cardScale.value = withSpring(0.97, { damping: 15, stiffness: 300 }); }, []);
   const handlePressOut = useCallback(() => { cardScale.value = withSpring(1, { damping: 15, stiffness: 300 }); }, []);
   const handlePress = useCallback(() => { Haptics.selectionAsync(); runOnJS(doNavigate)(); }, [doNavigate]);

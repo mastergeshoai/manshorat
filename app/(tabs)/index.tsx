@@ -682,7 +682,7 @@ export default function DiscoverScreen() {
               <MaterialIcons name="psychology" size={22} color={theme.primary} />
             </Pressable>
           <Pressable
-            onPress={() => { Haptics.selectionAsync(); router.push('/(tabs)/notifications'); }}
+            onPress={() => { Haptics.selectionAsync(); router.push('/(tabs)/notifications' as any); }}
             style={[s.notifBtn, { backgroundColor: theme.surface, borderColor: theme.border }]}
           >
             <MaterialIcons
